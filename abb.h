@@ -1,12 +1,14 @@
-typedef struct No {
-    int key;
-    struct No* esq;
-    struct No* dir;
-    struct No* pai;
-    char mods [3][10];
-} No;
+typedef struct Versao Versao;
 
-void incluirNo (No* raiz, int key);
+typedef struct No No;
+
+typedef struct Memoria Memoria;
+
+int achaVersao (No* no, int* ver);
+
+void corrigeNo (No* no);
+
+void incluirNo (Memoria* mem, No* raiz, int key, int* ver);
 
 void remocaoNo (No* raiz, int key);
 
