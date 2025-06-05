@@ -4,12 +4,16 @@ typedef struct No No;
 
 typedef struct Memoria Memoria;
 
-void corrigeNo (No* no);
+No* criaNo (Memoria* mem, int key, No* esq, No* dir);
 
-void incluirNo (Memoria* mem, No* raiz, int key, int* ver);
+No timeMachine (No* no, int ver);
+
+No* ligaNo (Memoria* mem, No* raiz, No* add, char campo[3], int* ver);
+
+No* incluirNo (Memoria* mem, No* raiz, int key, int* ver);
 
 void remocaoNo (No* raiz, int key);
 
 void sucessorNo(No* raiz, int key, int ver);
 
-void imprimeNo (No* raiz, int key, int ver);
+void imprimeNo (No* raiz, int* ver, int prof);
