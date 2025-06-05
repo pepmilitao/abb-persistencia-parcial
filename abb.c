@@ -4,29 +4,24 @@
 struct Versao {
     int ver;
     char campo[3];
-    No* valor_anterior;
+    No* valor;
 };
 
 struct No {
     int key;
     No* esq;
     No* dir;
-    No* pai;
-    Versao mods[6];
+    Versao mods[2];
     int i;
 };
 
 struct Memoria {
     int ver;
     No arvore[100];
-    No raizes[20];
+    No raizes[50];
     int tamanho_arvore;
     int tamanho_raizes;
 };
-
-int achaVersao (No* no, int* ver) {
-    
-}
 
 void incluirNo (Memoria* mem, No* raiz, int key, int* ver) {
     
@@ -37,22 +32,14 @@ void incluirNo (Memoria* mem, No* raiz, int key, int* ver) {
             // Criar nó na memória
             mem->arvore[mem->tamanho_arvore++] = (No) {
                 .key = key,
-                .pai = raiz,
                 .i = 0
             };
-
-            // Verifica se há espaço no vetor de modificações
-            // Se não houver mais espaço um novo nó raiz deve ser criado
-            if (raiz->i <= 6) {
-
-                // Registar modificação
+            
+            // Se possível, registra modificação do campo, se não, cria cópia de nó
+            if (raiz->i <= 1) {
                 raiz->mods[raiz->i++] = (Versao) {*ver, "esq", raiz->esq};
-                // Ligar novo nó no nó raiz
-                raiz->esq = &mem->arvore[mem->tamanho_arvore];
-
             } else {
-                
-                // Corrigir nó raiz recursivamente
+
             }
         } else {
             incluirNo (mem, raiz->esq, key, ver);

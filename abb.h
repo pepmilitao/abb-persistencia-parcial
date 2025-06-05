@@ -4,8 +4,6 @@ typedef struct No No;
 
 typedef struct Memoria Memoria;
 
-int achaVersao (No* no, int* ver);
-
 void corrigeNo (No* no);
 
 void incluirNo (Memoria* mem, No* raiz, int key, int* ver);
