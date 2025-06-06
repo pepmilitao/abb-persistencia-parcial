@@ -1,19 +1,27 @@
-typedef struct Versao Versao;
+typedef struct No{
+    int key;
+    struct No* esq;
+    struct No* dir;
+    int mod_ver;
+    char mod_campo;
+    struct No* mod_valor;
+} No;
 
-typedef struct No No;
+typedef struct Raiz {
+    No* raiz;
+    int versao_max;
+} Raiz;
 
-typedef struct Memoria Memoria;
+No* criaNo (int key, No* esq, No* dir);
 
-No* criaNo (Memoria* mem, int key, No* esq, No* dir);
+void timeMachine (No* raiz, No** esq, No** dir, int ver);
 
-No timeMachine (No* no, int ver);
+No* ligaNo (No* raiz, No* add, char campo, int ver);
 
-No* ligaNo (Memoria* mem, No* raiz, No* add, char campo[3], int* ver);
+No* incluirNo (No* raiz, int key, int ver);
 
-No* incluirNo (Memoria* mem, No* raiz, int key, int* ver);
+// TODO: void remocaoNo (No* raiz, int key);
 
-void remocaoNo (No* raiz, int key);
+// TODO: void sucessorNo(No* raiz, int key, int ver);
 
-void sucessorNo(No* raiz, int key, int ver);
-
-void imprimeNo (No* raiz, int* ver, int prof);
+void imprimeArvore (No* raiz, int ver, int prof);
