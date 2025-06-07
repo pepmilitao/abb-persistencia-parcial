@@ -23,16 +23,18 @@ int main () {
     char op[3];
     No* raiz = NULL;
     int key, ver, act_raiz, act_ver = 0;
+    No* ret;
+    No* raiz_ret;
 
     raizes[r++] = (Raiz){raiz, 0};
     
     // Operação do programa
-    while (act_ver < 5) {
+    while (act_ver < 100) {
         scanf("%s", op);
         if (strcmp(op, "INC") == 0) {
             scanf(" %d", &key);
             ++act_ver;
-            No* ret = incluirNo (raiz, key, act_ver);
+            ret = incluirNo (raiz, key, act_ver);
 
             if (ret != raiz) {
                 raizes[r - 1].versao_max = act_ver - 1;
@@ -44,13 +46,31 @@ int main () {
         } else if (strcmp(op, "IMP") == 0) {
             // TODO: imprimir versão mais recente sem mencionar versão
             scanf(" %d", &ver);
-            No* raiz_ver = getRaiz(ver);
-            imprimeArvore (raiz_ver, ver, 0);
-            for (int i = 0; i < r; ++i) {
-                printf("No %p VersãoMax %d ", &raizes[i].raiz, raizes[i].versao_max);
+            raiz_ret = getRaiz(ver);
+            imprimeArvore (raiz_ret, ver, 0);
+        } else if (strcmp(op, "REM") == 0) {
+            scanf(" %d", &key);
+            ++act_ver;
+            ret = remocaoNo (raiz, key, act_ver);
+
+            if (ret != raiz) {
+                raizes[r - 1].versao_max = act_ver - 1;
+                raizes[r++] = (Raiz) {ret, act_ver};
+                raiz = ret;
+            } else {
+                raizes[r - 1].versao_max = act_ver;
+            }
+        } else if (strcmp(op, "SUC") == 0) {
+            scanf(" %d %d", &key, &ver);
+            raiz_ret = getRaiz(ver);
+            ret = sucessorNo (raiz_ret, key, ver);
+            if (ret != NULL) {
+                printf("SUC %d %d\n%d", key, ver, ret->key);
+            } else {
+                printf("SUC %d %d\ninfinito", key, ver);
             }
         }
-        printf("Versão: %d\n", act_ver);
+        printf("\n");
     }
     
     free(raiz);

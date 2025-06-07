@@ -20,8 +20,8 @@ No* ligaNo (No* raiz, No* add, char campo, int ver);
 
 No* incluirNo (No* raiz, int key, int ver);
 
-// TODO: void remocaoNo (No* raiz, int key);
+No* remocaoNo (No* raiz, int key, int ver);
 
-// TODO: void sucessorNo(No* raiz, int key, int ver);
+No* sucessorNo(No* raiz, int key, int ver);
 
 void imprimeArvore (No* raiz, int ver, int prof);
